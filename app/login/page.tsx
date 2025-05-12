@@ -1,20 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { createClient } from "@/utils/supabase/client";
+import { signinWithGoogle } from "@/utils/actions";
 
 export default function LoginPage() {
-  const supabase = createClient();
-
-  const signInWithGoogle = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${location.origin}/auth/callback/`, // đường dẫn redirect sau khi đăng nhập
-      },
-    });
-  };
-
   return (
     <div className="flex flex-col md:flex-row min-h-screen">
       {/* Left image - ẩn trên mobile */}
@@ -65,7 +54,7 @@ export default function LoginPage() {
           <div className="text-center">
             <p className="text-sm text-gray-500">Or sign in with Google</p>
             <button
-              onClick={signInWithGoogle}
+              onClick={signinWithGoogle}
               className="mt-2 w-full border flex items-center justify-center gap-2 border-gray-300 py-2 rounded-md hover:bg-gray-100"
             >
               <img src="/icons8-google.svg" className="w-5 h-5" />
